@@ -7,11 +7,24 @@
  * Computes the sum of three bits.
  */
 
+// A + B  = AplusB + AplusBCarry
+// A + B + C = AplusBplusC + ABCCarry + AplusBCarry
+
 CHIP FullAdder {
     IN a, b, c;  // 1-bit inputs
     OUT sum,     // Right bit of a + b + c
         carry;   // Left bit of a + b + c
 
     PARTS:
-    // Put you code here:
+    
+    HalfAdder(a = a, b = b, sum = AplusB, carry = AplusBCarry);
+    HalfAdder(a = AplusB, b = c, sum = AplusBplusC, carry = ABCCarry);
+    
+    Xor(a = AplusBCarry, b = ABCCarry, out = carry);
+
+    // Sum should only be increased by one if both carries were 1
+    And(a = AplusBCarry, b = ABCCarry, out = inc);
+    HalfAdder(a = AplusBplusC, b = inc, sum = sum, carry = deadEnd);
+
+
 }
