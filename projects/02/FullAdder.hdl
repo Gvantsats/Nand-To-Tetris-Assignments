@@ -18,12 +18,9 @@ CHIP FullAdder {
     PARTS:
     
     HalfAdder(a = a, b = b, sum = AplusB, carry = AplusBCarry);
-    HalfAdder(a = AplusB, b = c, sum = AplusBplusC, carry = ABCCarry);
+    HalfAdder(a = AplusB, b = c, sum = sum, carry = ABCCarry);
     
-    Xor(a = AplusBCarry, b = ABCCarry, out = carry);
-
-    // Sum should only be increased by one if both carries were 1 but the never will.
-    And(a = AplusBCarry, b = ABCCarry, out = inc);
-    HalfAdder(a = AplusBplusC, b = inc, sum = sum, carry = deadEnd);
+    // Could've also used `Xor` since both of them will never be 1
+    Or(a = AplusBCarry, b = ABCCarry, out = carry);
 
 }
