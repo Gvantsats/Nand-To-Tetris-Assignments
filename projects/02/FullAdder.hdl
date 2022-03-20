@@ -22,9 +22,8 @@ CHIP FullAdder {
     
     Xor(a = AplusBCarry, b = ABCCarry, out = carry);
 
-    // Sum should only be increased by one if both carries were 1
+    // Sum should only be increased by one if both carries were 1 but the never will.
     And(a = AplusBCarry, b = ABCCarry, out = inc);
     HalfAdder(a = AplusBplusC, b = inc, sum = sum, carry = deadEnd);
-
 
 }
