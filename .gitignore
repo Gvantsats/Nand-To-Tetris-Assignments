@@ -1,4 +1,5 @@
 nand2tetris
 .DS_Store
+.vscode
 *.out
 *.dat
