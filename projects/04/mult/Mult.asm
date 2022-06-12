@@ -13,32 +13,24 @@
 @sum
 M = 0
 
-// i = 0
-@i
-M = 0
-
 (LOOP)
 // read R0
 @R0
 D = M
 
-// i - M[R0]
-@i
-D = D - M
-
 // JUMP if i == M[R0]
 @ASSIGN
 D;JEQ
+
+// R[0]--
+@R0
+M = M - 1
 
 // sum += R1
 @R1
 D = M 
 @sum
 M = M + D
-
-// i++
-@i
-M = M + 1
 
 @LOOP
 0;JMP
