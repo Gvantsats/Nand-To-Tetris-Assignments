@@ -9,4 +9,49 @@
 // This program only needs to handle arguments that satisfy
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
-// Put your code here.
+// sum = 0
+@sum
+M = 0
+
+// i = 0
+@i
+M = 0
+
+(LOOP)
+// read R0
+@R0
+D = M
+
+// i - M[R0]
+@i
+D = D - M
+
+// JUMP if i == M[R0]
+@ASSIGN
+D;JEQ
+
+// sum += R1
+@R1
+D = M 
+@sum
+M = M + D
+
+// i++
+@i
+M = M + 1
+
+@LOOP
+0;JMP
+
+// M[R2] = sum
+(ASSIGN)
+@sum
+D = M
+
+@R2
+M = D
+// return
+@END
+0;JMP
+
+(END)
